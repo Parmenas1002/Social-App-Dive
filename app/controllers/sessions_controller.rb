@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
         user = User.find_by(email: params[:session][:email])
         if user && user.authenticate(params[:session][:password])
             session[:user_id] = user.id
-            redirect_to posts_path, notice: "Login sucess"
+            redirect_to posts_path, notice: "Happy to see you again #{user.name}"
         else
             flash.now[:danger] = "Login Failed"
             render :new
@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
 
     def destroy
         session.delete(:user_id)
-        redirect_to new_session_path, notice: "Logout"
+        redirect_to new_session_path, notice: "Logout success"
     end
 end
