@@ -6,14 +6,12 @@
                 <%= form_with(model: @post, local:true) do |form| %>
                     <%= form.hidden_field :image_cache %> 
                     <%= form.hidden_field :content %>
-
                     <% if @post.content != "" %>
                     <p class= "text-justify"><%= @post.content %></p> 
                     <%end%>
                     <div class= "post_image mb-4"> 
                         <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
                     </div>
-                    
                     <%= form.submit "Post", class: "btn btn-success mr-3 text-white font-weight-bold pt-2 pb-2 pl-3 pr-3" %>
                     <%= form.submit "Return to edit", name: 'back', class: "btn btn-danger font-weight-bold pt-2 pb-2 pl-3 pr-3" %>
                 <%end%>

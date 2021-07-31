@@ -6,7 +6,6 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
   </head>
 
   <body class= "bg-light">
@@ -18,8 +17,7 @@
       </a>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon text-dark"></span>
-      </button> 
-      
+      </button>  
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown pr-5">
@@ -30,12 +28,9 @@
               <%= link_to 'Create new Post', new_post_path, class: "p-3" %>
               <div class="dropdown-divider"></div>
               <%= link_to 'Logout', session_path(current_user.id), method: :delete, class: "dropdown-item text-center font-weight-bold" %>
- 
             </div>
           </li>
-          
         </ul>
-        
       </div>
   </nav>
   <% end %>
@@ -47,8 +42,6 @@
         </button>
       <% end %>  
   <% end %>
-  
     <%= yield %>
-    
   </body>
 </html>
