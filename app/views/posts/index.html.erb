@@ -1,4 +1,68 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
 
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-around align-content-center ">
+        <div class= "col-lg-6 col-md-10">
+            <div class="row justify-content-center align-content-center ">
+                <div class= "col-md-12 pl-5 pr-5">
+                    <div class="card shadow mb-5 bg-white border-0 index-card" >
+                        <div class="card-body">
+                            <%= image_tag "profile.png", width: 50, class: "rounded-circle" %> <span class="pl-2 font-weight-bold" style="font-size: 16px; color:#364D59;"><%= current_user.name %> What's new</span>
+                            <div class="row justify-content-center align-content-center mt-3">
+                                <div class= "col-md-10 pl-5 pr-5">
+                                    <%= link_to new_post_path do %>
+                                        <p class="new-post-link pt-2 pb-2 pl-2 text-white bg-gray">Add your post here</p>
+                                    <% end %>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                <% @posts.each do |post| %>
+                    <div class= "col-md-12 pl-5 pr-5">
+                        <div class="card shadow mb-5 bg-white border-0 index-card" >
+                            <div class="card-header pl-4 pb-0" style="border: none; background-color:white;">
+                                <div class="row justify-content-around align-content-center ">
+                                    <div class= "col-md-8 ">
+                                        <%= image_tag "profile.png", width: 50, class: "rounded-circle" %> <span class="pl-2" style="font-size: 16px; color:#364D59;"><%= post.user.name %> add a new post</span>
+                                        <p class= "text-capitalize small"><%= time_ago_in_words(post.created_at) %></p>
+                                    </div>
+                                    <div class= "col-md-4 pt-2">
+                                        <ul class="nav justify-content-end ">
+                                            <li class="nav-item pr-3 ">
+                                                <%= link_to  'Details' , post_path(post.id), class: "card-menu-link"   %>
+                                            </li>
+                                            <% if post.user_id == current_user.id %>
+                                                <li class="nav-item pr-3 ">
+                                                    <%= link_to  'Edit' , edit_post_path(post.id), class: "card-menu-link"  %>
+                                                </li>
+                                                <li><%= link_to  'Delete' , post_path(post.id), method: :delete , data: { confirm: 'Are you sure to delete'}, class: "card-menu-link" %></li>
+                                            <% end %>
+                                            
+                                        </ul> 
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="dropdown-divider pt-0"></div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <% if post.content != "" %>
+                                        <p class="text-justify"><%= post.content %></p>
+                                    
+                                    <% end %>
+
+                                    <%= image_tag (post.image.url), class: "post-img" %>
+                                </div>
+                         
+                            </div>
+                            
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
 

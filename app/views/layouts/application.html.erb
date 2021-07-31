@@ -4,23 +4,51 @@
     <title>Socialmedia</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
-  <body>
+  <body class= "bg-light">
   
-  <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-  <% end %>
   <% if logged_in? %>
-    <%= link_to 'Profile', user_path(current_user.id) %>
-    <%= link_to 'Logout', session_path(current_user.id), method: :delete %>
-  <% else %>
-  <%= link_to 'Sign up', new_user_path %>
-  <%= link_to 'Login', new_session_path %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm pt-0 pb-0">
+      <a class="navbar-brand" href="/posts">
+        <%= image_tag "logo.png", height: 42, width:65 %>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon text-dark"></span>
+      </button> 
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown pr-5">
+            <a class="nav-link dropdown-toggle font-weight-bold pr-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.name %> 
+            </a>
+            <div class="dropdown-menu shadow mb-5 bg-white rounded border-0" aria-labelledby="navbarDropdown">
+              <%= link_to 'Create new Post', new_post_path, class: "p-3" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to 'Logout', session_path(current_user.id), method: :delete, class: "dropdown-item text-center font-weight-bold" %>
+ 
+            </div>
+          </li>
+          
+        </ul>
+        
+      </div>
+  </nav>
   <% end %>
+  <% flash.each do |key, value| %>
+      <%= content_tag(:div, class: "alert alert-#{key} alert-dismissible fade show pt-2 pb-2", role: "alert") do %>
+        <p class="text-center font-weight-bold"><%= value %> </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      <% end %>  
+  <% end %>
+  
     <%= yield %>
+    
   </body>
 </html>
