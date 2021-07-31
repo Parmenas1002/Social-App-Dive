@@ -3,11 +3,9 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.order(updated_at: :desc)
   end
-
   def new
     @post = Post.new
   end
-
   def create
     @post = current_user.posts.build(post_params)
     if params[:back]
